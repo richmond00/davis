@@ -5,7 +5,7 @@ function solution(arr1, arr2) {
   var l1 = arr1.length;
   var l2 = arr2.length;
 
-  while (p1 < l1 || p2 < l2) {
+  while (p1 < l1 && p2 < l2) {
     var val1 = arr1[p1];
     var val2 = arr2[p2];
 
