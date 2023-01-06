@@ -1,53 +1,37 @@
-function solution(input) {
-  var answer = "";
-  var max = -1;
-  var obj = {};
-  var strArr = input.split("");
+function solution(str1, str2) {
+  var answer = "YES";
+  var strArr1 = str1.split("");
+  var strArr2 = str2.split("");
+  var map1 = new Map();
+  var map2 = new Map();
 
-  for (let i = 0; i < strArr.length; i++) {
-    var char = strArr[i];
-
-    if (obj[char]) {
-      obj[char]++;
+  strArr1.forEach((char) => {
+    if (map1.has(char)) {
+      map1.set(char, map1.get(char) + 1);
     } else {
-      obj[char] = 1;
+      map1.set(char, 1);
     }
-  }
+  });
 
-  Object.keys(obj).forEach((key) => {
-    if (obj[key] > max) {
-      max = obj[key];
-      answer = key;
+  strArr2.forEach((char) => {
+    if (map2.has(char)) {
+      map2.set(char, map2.get(char) + 1);
+    } else {
+      map2.set(char, 1);
+    }
+  });
+
+  map1.forEach((_, key) => {
+    if (!map2.has(key)) {
+      answer = "NO";
+    } else if (map1.get(key) !== map2.get(key)) {
+      answer = "NO";
     }
   });
 
   return answer;
 }
 
-function solution2(input) {
-  var answer = "";
-  var map = new Map();
-  var max = -1;
-  var strArr = input.split("");
-
-  strArr.forEach((char) => {
-    if (map.has(char)) {
-      map.set(char, map.get(char) + 1);
-    } else {
-      map.set(char, 1);
-    }
-  });
-
-  map.forEach((val, key) => {
-    if (val > max) {
-      max = val;
-      answer = key;
-    }
-  });
-
-  return answer;
-}
-
-var input = "BACBACCACCBDEDE";
-var output = solution2(input);
+var output = solution("AbaAeCe", "baeeACA");
+// var output = solution("abaCC", "Caaab");
 console.log(output);
